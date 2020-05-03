@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.vaaniga.invest.data.dto.ListedCompanyDto;
@@ -47,5 +48,22 @@ public class VaanigaDataServiceImpl implements VaanigaDataService {
 	@Override
 	public void populateListedCompanyData() {
 		implHelper.performPopulateListedCompanies();
+	}
+
+	@Override
+	public List<ListedCompanyDto> getListedCompanies() {
+		
+		Iterable<ListedCompany> searchResults = implHelper.getListedCompanyRepository().findAll(Sort.by("serialNumber"));
+		
+		List<ListedCompanyDto> results = new ArrayList<>();
+		
+		for (ListedCompany company : searchResults) {
+			
+			ListedCompanyDto dto = new ListedCompanyDto(company);
+			
+			results.add(dto);
+		}
+		
+		return results;
 	}
 }

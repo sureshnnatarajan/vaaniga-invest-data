@@ -1,6 +1,6 @@
 server:
   servlet:
-    context-path: /vaanigaData/
+    context-path: /vaanigaData
 spring:
   datasource:
     password: vaaniga_invadmin

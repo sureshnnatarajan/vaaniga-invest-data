@@ -2,13 +2,13 @@ package com.vaaniga.invest.data.repository;
 
 import java.util.List;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
 import com.vaaniga.invest.data.model.ListedCompany;
 
 @Repository
-public interface ListedCompanyRepository extends JpaRepository<ListedCompany, Long> {
+public interface ListedCompanyRepository extends PagingAndSortingRepository<ListedCompany, Long> {
 
 	List<ListedCompany> findByCompanyNameContainingIgnoreCase(String companyName);
 	

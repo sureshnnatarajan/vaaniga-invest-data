@@ -29,7 +29,7 @@ public class VaanigaDataController {
 		this.vaanigaDataService = vaanigaDataServiceParam;
 	}
 	
-	@GetMapping(value = "/listedCompanies", produces=MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/generateListedCompanies", produces=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Object> generateListedCompanies() {
 		Map<String, String> responseObject = new HashMap<>(1);
 		
@@ -39,6 +39,21 @@ public class VaanigaDataController {
 		
 		long timeElapsed = System.nanoTime() - startTime;
 		responseObject.put("results", "Success");
+		responseObject.put("executionTime", timeElapsed / 1000000 + " milliseconds");
+		
+		return new ResponseEntity<>(responseObject, HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/listedCompanies", produces=MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Object> getListedCompanies() {
+		Map<String, Object> responseObject = new HashMap<>(1);
+		
+		long startTime = System.nanoTime();
+		
+		List<ListedCompanyDto> companyList = vaanigaDataService.getListedCompanies();
+		
+		long timeElapsed = System.nanoTime() - startTime;
+		responseObject.put("results", companyList);
 		responseObject.put("executionTime", timeElapsed / 1000000 + " milliseconds");
 		
 		return new ResponseEntity<>(responseObject, HttpStatus.OK);

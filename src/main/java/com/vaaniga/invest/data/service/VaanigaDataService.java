@@ -10,6 +10,8 @@ public interface VaanigaDataService {
 	
 	List<ListedCompanyDto> getListedCompany(String companyName);
 	
+	List<ListedCompanyDto> getListedCompanies();
+	
 	//To be invoked via a scheduler (or) via a privileged user with get api since path of CSV file will be hardcoded.
 	void populateListedCompanyData();
 	
